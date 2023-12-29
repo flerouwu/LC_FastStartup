@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Description>Mod to skip the animations / splashes that play on game startup.</Description>
-        <Version>1.0.0</Version>
+        <Version>1.1.0</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>default</LangVersion>
         <PackageId>FastStartup</PackageId>
