@@ -1,3 +1,4 @@
+using System;
 using BepInEx.Logging;
 using UnityEngine.SceneManagement;
 
@@ -15,9 +16,22 @@ internal class LaunchOptionsSaver {
     }
 
     internal void Start() {
+        if (!Plugin.Config.SkipLaunchMode.Value) return;
         Plugin.Initialize();
 
-        LogSource.LogInfo("Skipping launch options, defaulting to online mode.");
-        SceneManager.LoadScene("InitScene");
+        var mode = Plugin.Config.AutoLaunchMode.Value;
+        LogSource.LogInfo($"Skipping launch options, defaulting to {Plugin.Config.AutoLaunchMode.Value}.");
+        switch (mode) {
+            case LaunchMode.Online:
+                SceneManager.LoadScene("InitScene");
+                break;
+
+            case LaunchMode.Lan:
+                SceneManager.LoadScene("InitSceneLANMode");
+                break;
+
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 }

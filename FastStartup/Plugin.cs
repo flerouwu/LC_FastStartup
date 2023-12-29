@@ -10,6 +10,7 @@ public class Plugin : BaseUnityPlugin {
     public const string ModName = "FastStartup";
     public const string ModVersion = "1.0.0";
 
+    public new static Config Config { get; private set; }
     public static bool Initialized { get; private set; }
 
     internal static void Initialize() {
@@ -19,6 +20,9 @@ public class Plugin : BaseUnityPlugin {
 
     #region Unity Events
     private void Awake() {
+        Logger.LogInfo("Loading Configuration");
+        Config = new Config(base.Config);
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         Logger.LogInfo($"Plugin {ModId} is loaded!");
 
@@ -39,6 +43,7 @@ public class Plugin : BaseUnityPlugin {
 
             // Boot Animation scene
             case "InitScene":
+            case "InitSceneLANMode":
                 new BootAnimSaver().Start();
                 break;
 

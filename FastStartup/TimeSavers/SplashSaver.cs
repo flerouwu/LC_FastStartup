@@ -19,6 +19,7 @@ internal class SplashSaver {
     }
 
     internal void Start() {
+        if (!Plugin.Config.SkipSplashes.Value) return;
         Task.Factory.StartNew(() => {
             LogSource.LogInfo("Trying to stop splash screen.");
 

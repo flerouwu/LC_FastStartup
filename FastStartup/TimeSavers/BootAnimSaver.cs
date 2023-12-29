@@ -17,6 +17,7 @@ internal class BootAnimSaver {
     }
 
     internal void Start() {
+        if (!Plugin.Config.SkipBootAnim.Value) return;
         var game = Object.FindObjectOfType<InitializeGame>();
         if (game == null) return;
 
