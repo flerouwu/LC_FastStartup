@@ -50,6 +50,7 @@ public class Plugin : BaseUnityPlugin {
             // Main menu (obviously)
             case "MainMenu":
                 new MenuAnimSaver().Start();
+                new LanPopupSaver().Start();
                 break;
         }
     }
