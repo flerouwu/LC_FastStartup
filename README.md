@@ -22,7 +22,7 @@ on game startup.
 
 ### Thunderstore
 
-TODO: Upload to Thunderstore.
+You can search for "LC_FastStartup" in your package manager or manually download it on [Thunderstore](https://thunderstore.io/c/lethal-company/p/flerouwu/LC_FastStartup/).
 
 ### Direct Download
 
