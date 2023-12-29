@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current">
+  <PropertyGroup>
+    <!-- Update your Lethal Company game directory and mod manager's profile here. -->
+    <GamePath>/home/flero/.local/share/Steam/steamapps/common/Lethal Company</GamePath>
+    <ProfilePath>/home/flero/.config/r2modmanPlus-local/LethalCompany/profiles/Development</ProfilePath>
+  </PropertyGroup>
+  
+  <Target Name="CopyToDevelopmentProfile" AfterTargets="PostBuildEvent" Condition="true">
+    <MakeDir Directories="$(ProfilePath)/BepInEx/plugins/$(AssemblyName)" Condition="Exists('$(ProfilePath)') And !Exists('$(ProfilePath)/BepInEx/plugins/$(AssemblyName)')" />
+    <!-- Windows with 'copy' -->
+    <Exec Command="copy '$(TargetPath)' '$(ProfilePath)/BepInEx/plugins/$(AssemblyName)/'" Condition="'$(OS)' == 'Windows_NT'" />
+    <!-- Linux/OSX with 'cp' -->
+    <Exec Command="cp '$(TargetPath)' '$(ProfilePath)/BepInEx/plugins/$(AssemblyName)/'" Condition="'$(OS)' != 'Windows_NT'" />
+  </Target>
+</Project>
