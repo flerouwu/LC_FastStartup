@@ -17,6 +17,60 @@ on game startup.
 - [Boot Animation](https://github.com/flerouwu/LC_FastStartup/blob/main/Assets/BootAnim.png)
 - Launch Mode - defaults to Online
 - Menu Animation (lil squash thingy)
+- LAN mode warning popup (that mentions VPN / firewall usage)
+
+### Configuration
+
+Everything that FastStartup does is configurable within the `BepInEx/config/dev.flero.lethal.FastStartup.cfg` file.
+The config file has comments that should explain what everything does. If you are confused, feel free to open an issue.
+
+**Note:** You must have launched the game after installing the mod before the config file is generated.
+
+<details>
+<summary>Default Config</summary>
+
+```properties
+## Settings file was created by plugin FastStartup v1.1.0
+## Plugin GUID: dev.flero.lethal.FastStartup
+
+[LaunchMode]
+
+## Whether we should skip the launch mode screen.
+# Setting type: Boolean
+# Default value: true
+Enabled = true
+
+## Default mode to launch into.
+# Setting type: LaunchMode
+# Default value: Online
+# Acceptable values: Online, Lan
+DefaultLaunchMode = Online
+
+[Misc]
+
+## Whether to disable the 'You are in LAN mode' popup.
+# Setting type: Boolean
+# Default value: true
+DisableLanPopup = true
+
+[Skips]
+
+## Whether we should skip the terminal-like boot animation.
+# Setting type: Boolean
+# Default value: true
+BootAnim = true
+
+## Whether we should skip the small squash animation of the main menu.
+# Setting type: Boolean
+# Default value: true
+MenuAnim = true
+
+## Whether we should skip the splash screens.
+# Setting type: Boolean
+# Default value: true
+SplashScreens = true
+```
+</details>
 
 ## Installation
 
