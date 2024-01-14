@@ -1,26 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <Description>Mod to skip the animations / splashes that play on game startup.</Description>
         <Version>1.1.0</Version>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>default</LangVersion>
-        <PackageId>FastStartup</PackageId>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        
+        <PackageId>LC_FastStartup</PackageId>
+        <Description>Mod to skip the animations / splashes that play on game startup.</Description>
     </PropertyGroup>
 
+    <!-- NuGet Packages -->
     <ItemGroup>
         <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all"/>
         <PackageReference Include="BepInEx.Core" Version="5.*"/>
         <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*"/>
     </ItemGroup>
 
-    <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
-        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all"/>
-    </ItemGroup>
-
     <ItemGroup>
         <None Include="FastStartup.csproj.user"/>
 
+        <!-- Removed files from the solution explorer. -->
+        <None Remove="FastStartup.csproj.user.example"/>
+    </ItemGroup>
+
+    <!-- Game Assemblies -->
+    <ItemGroup>
         <Reference Include="Assembly-CSharp">
             <HintPath>$(GamePath)/Lethal Company_Data/Managed/Assembly-CSharp.dll</HintPath>
         </Reference>
@@ -36,7 +40,59 @@
         <Reference Include="UnityEngine.Animator">
             <HintPath>$(GamePath)/Lethal Company_Data/Managed/UnityEngine.AnimationModule.dll</HintPath>
         </Reference>
-        <None Remove="LICENSE.txt"/>
-        <None Remove="FastStartup.csproj.user.example"/>
     </ItemGroup>
+
+    <!--
+        # Targets > CopyToDevelopmentProfile
+        Copies the built mod DLLs to the ProfilePath for testing.
+        
+        ProfilePath is the path to your mod manager's profile.
+        Set it in FastStartup.csproj.user.
+    -->
+    <Target Name="CopyToDevelopmentProfile" AfterTargets="PostBuildEvent" Condition="true">
+        <PropertyGroup>
+            <ModPath>$(ProfilePath)/BepInEx/plugins/$(AssemblyName)</ModPath>
+        </PropertyGroup>
+        
+        <!-- Recreate the directory. -->
+        <RemoveDir Directories="$(ModPath)" Condition="Exists('$(ModPath)')" />
+        <MakeDir Directories="$(ModPath)" Condition="Exists('$(ProfilePath)')"/>
+        
+        <!-- Copy Files -->
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModPath)" />
+    </Target>
+    
+    <!--
+        # Targets > PackageThunderstore
+        Copies the built mod DLLs and other metadata files into a folder
+        and creates a zip archive.
+        
+        This is the file that gets uploaded to Thunderstore.
+    -->
+    <Target Name="PackageThunderstore" AfterTargets="PostBuildEvent" Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+        <PropertyGroup>
+            <PackagePath>$(OutputPath)/Thunderstore</PackagePath>
+            <ArchivePath>$(OutputPath)/$(AssemblyName)-$(Version).zip</ArchivePath>
+        </PropertyGroup>
+        
+        <!-- Recreate the directory. -->
+        <RemoveDir Directories="$(PackagePath)" Condition="Exists('$(PackagePath)')" />
+        <MakeDir Directories="$(PackagePath)" />
+        
+        <!-- Copy Files -->
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(PackagePath)" />
+        <Copy SourceFiles="../Assets/Icon.png" DestinationFiles="$(PackagePath)/icon.png" />
+        <Copy SourceFiles="../manifest.json" DestinationFolder="$(PackagePath)" />
+        <Copy SourceFiles="../README.md" DestinationFolder="$(PackagePath)" />
+        <Copy SourceFiles="../CHANGELOG.md" DestinationFolder="$(PackagePath)" />
+        <Copy SourceFiles="../LICENSE.txt" DestinationFolder="$(PackagePath)" />
+        
+        <!-- ZIP into final archive. -->
+        <Delete Files="$(ArchivePath)" Condition="Exists('$(ArchivePath)')" />
+        <ZipDirectory SourceDirectory="$(PackagePath)" DestinationFile="$(ArchivePath)" />
+
+        <Message Importance="high" Text="%0a" />
+        <Message Importance="high" Text="[I] Zipped release build to $(ArchivePath)." />
+        <Message Importance="high" Text="[I] Version: $(Version)" />
+    </Target>
 </Project>
