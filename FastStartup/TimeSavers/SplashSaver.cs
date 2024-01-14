@@ -29,7 +29,7 @@ internal class SplashSaver {
                 LogSource.LogInfo($"Waiting for {delay} seconds before skipping splashes.");
                 Thread.Sleep(TimeSpan.FromSeconds(delay));
             }
-            
+
             LogSource.LogInfo($"Trying to stop splash screen. Cancelling after {duration} seconds.");
 
             // I was unable to find any better way to do this.

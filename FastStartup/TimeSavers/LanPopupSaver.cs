@@ -19,7 +19,7 @@ internal class LanPopupSaver {
         if (!Plugin.Config.DisableLanPopup.Value) return;
         var obj = Object.FindObjectOfType<MenuManager>();
         if (obj == null) return;
-            
+
         LogSource.LogInfo("Destroying LAN popup");
         Object.Destroy(obj.lanWarningContainer);
     }

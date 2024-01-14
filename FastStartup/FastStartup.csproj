@@ -4,23 +4,23 @@
         <Version>1.1.0</Version>
         <LangVersion>default</LangVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        
+
         <PackageId>LC_FastStartup</PackageId>
         <Description>Mod to skip the animations / splashes that play on game startup.</Description>
     </PropertyGroup>
 
     <!-- NuGet Packages -->
     <ItemGroup>
-        <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all"/>
-        <PackageReference Include="BepInEx.Core" Version="5.*"/>
-        <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*"/>
+        <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
+        <PackageReference Include="BepInEx.Core" Version="5.*" />
+        <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="FastStartup.csproj.user"/>
+        <None Include="FastStartup.csproj.user" />
 
         <!-- Removed files from the solution explorer. -->
-        <None Remove="FastStartup.csproj.user.example"/>
+        <None Remove="FastStartup.csproj.user.example" />
     </ItemGroup>
 
     <!-- Game Assemblies -->
@@ -53,15 +53,15 @@
         <PropertyGroup>
             <ModPath>$(ProfilePath)/BepInEx/plugins/$(AssemblyName)</ModPath>
         </PropertyGroup>
-        
+
         <!-- Recreate the directory. -->
         <RemoveDir Directories="$(ModPath)" Condition="Exists('$(ModPath)')" />
-        <MakeDir Directories="$(ModPath)" Condition="Exists('$(ProfilePath)')"/>
-        
+        <MakeDir Directories="$(ModPath)" Condition="Exists('$(ProfilePath)')" />
+
         <!-- Copy Files -->
         <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModPath)" />
     </Target>
-    
+
     <!--
         # Targets > PackageThunderstore
         Copies the built mod DLLs and other metadata files into a folder
@@ -74,11 +74,11 @@
             <PackagePath>$(OutputPath)/Thunderstore</PackagePath>
             <ArchivePath>$(OutputPath)/$(AssemblyName)-$(Version).zip</ArchivePath>
         </PropertyGroup>
-        
+
         <!-- Recreate the directory. -->
         <RemoveDir Directories="$(PackagePath)" Condition="Exists('$(PackagePath)')" />
         <MakeDir Directories="$(PackagePath)" />
-        
+
         <!-- Copy Files -->
         <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(PackagePath)" />
         <Copy SourceFiles="../Assets/Icon.png" DestinationFiles="$(PackagePath)/icon.png" />
@@ -86,7 +86,7 @@
         <Copy SourceFiles="../README.md" DestinationFolder="$(PackagePath)" />
         <Copy SourceFiles="../CHANGELOG.md" DestinationFolder="$(PackagePath)" />
         <Copy SourceFiles="../LICENSE.txt" DestinationFolder="$(PackagePath)" />
-        
+
         <!-- ZIP into final archive. -->
         <Delete Files="$(ArchivePath)" Condition="Exists('$(ArchivePath)')" />
         <ZipDirectory SourceDirectory="$(PackagePath)" DestinationFile="$(ArchivePath)" />
