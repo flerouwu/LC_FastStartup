@@ -10,7 +10,7 @@ public class Plugin : BaseUnityPlugin {
     public const string ModName = "FastStartup";
     public const string ModVersion = "1.1.0";
 
-    public new static Config Config { get; private set; }
+    public new static Config.Config Config { get; private set; }
     public static bool Initialized { get; private set; }
 
     internal static void Initialize() {
@@ -18,10 +18,11 @@ public class Plugin : BaseUnityPlugin {
         Initialized = true;
     }
 
+
     #region Unity Events
     private void Awake() {
         Logger.LogInfo("Loading Configuration");
-        Config = new Config(base.Config);
+        Config = new Config.Config(base.Config);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         Logger.LogInfo($"Plugin {ModId} is loaded!");

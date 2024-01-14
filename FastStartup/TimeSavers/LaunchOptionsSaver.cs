@@ -1,5 +1,6 @@
 using System;
 using BepInEx.Logging;
+using FastStartup.Config;
 using UnityEngine.SceneManagement;
 
 namespace FastStartup.TimeSavers;

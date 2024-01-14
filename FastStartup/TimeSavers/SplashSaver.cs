@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 using BepInEx.Logging;
 using UnityEngine;
@@ -21,7 +23,14 @@ internal class SplashSaver {
     internal void Start() {
         if (!Plugin.Config.SkipSplashes.Value) return;
         Task.Factory.StartNew(() => {
-            LogSource.LogInfo("Trying to stop splash screen.");
+            var delay = Plugin.Config.SplashDelay.Value;
+            var duration = Plugin.Config.SplashDuration.Value;
+            if (delay > 0) {
+                LogSource.LogInfo($"Waiting for {delay} seconds before skipping splashes.");
+                Thread.Sleep(TimeSpan.FromSeconds(delay));
+            }
+            
+            LogSource.LogInfo($"Trying to stop splash screen. Cancelling after {duration} seconds.");
 
             // I was unable to find any better way to do this.
             // I was hoping that there was some kind of event I could listen for,
@@ -31,8 +40,8 @@ internal class SplashSaver {
             while (!Plugin.Initialized) {
                 SplashScreen.Stop(SplashScreen.StopBehavior.StopImmediate);
 
-                if (!(Time.realtimeSinceStartup > 10)) continue;
-                LogSource.LogError("Failed to remove splash screen: 10 seconds has passed since startup!");
+                if (!(Time.realtimeSinceStartup > duration)) continue;
+                LogSource.LogError($"Failed to remove splash screen: {duration} seconds has passed since startup!");
                 break;
             }
         });
