@@ -11,6 +11,7 @@ namespace FastStartup.TimeSavers;
 /// </summary>
 internal class LaunchOptionsSaver {
     private static readonly ManualLogSource LogSource = new($"{Plugin.ModName}.Savers.LaunchOptions");
+    private static bool HasRan;
 
     internal LaunchOptionsSaver() {
         Logger.Sources.Add(LogSource);
@@ -18,6 +19,9 @@ internal class LaunchOptionsSaver {
 
     internal void Start() {
         if (!Plugin.Config.SkipLaunchMode.Value) return;
+        if (HasRan) return;
+        HasRan = true;
+
         Plugin.Initialize();
 
         var mode = Plugin.Config.AutoLaunchMode.Value;
