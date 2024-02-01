@@ -2,6 +2,7 @@ using System;
 using BepInEx.Logging;
 using FastStartup.Config;
 using UnityEngine.SceneManagement;
+using Logger = BepInEx.Logging.Logger;
 
 namespace FastStartup.TimeSavers;
 
@@ -9,15 +10,15 @@ namespace FastStartup.TimeSavers;
 ///     Skips the launch mode menu and
 ///     automatically loads into online.
 /// </summary>
-internal class LaunchOptionsSaver {
+internal static class LaunchOptionsSaver {
     private static readonly ManualLogSource LogSource = new($"{Plugin.ModName}.Savers.LaunchOptions");
     private static bool HasRan;
 
-    internal LaunchOptionsSaver() {
+    static LaunchOptionsSaver() {
         Logger.Sources.Add(LogSource);
     }
 
-    internal void Start() {
+    internal static void Start() {
         if (!Plugin.Config.SkipLaunchMode.Value) return;
         if (HasRan) return;
         HasRan = true;

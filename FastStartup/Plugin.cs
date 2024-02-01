@@ -45,15 +45,37 @@ public class Plugin : BaseUnityPlugin {
             // Boot Animation scene
             case "InitScene":
             case "InitSceneLANMode":
-                new BootAnimSaver().Start();
+                BootAnimSaver.Start();
                 break;
 
             // Main menu (obviously)
             case "MainMenu":
-                new MenuAnimSaver().Start();
-                new LanPopupSaver().Start();
+                MenuAnimSaver.Start();
+                LanPopupSaver.Start();
                 break;
         }
+    }
+
+    private void Initialize() {
+        if (Initialized) return;
+        Initialized = true;
+        
+        Logger.LogInfo("Loading Configuration");
+        Config = new Config.Config(base.Config);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        Logger.LogInfo($"Plugin {ModId} is loaded!");
+    }
+
+
+    #region Unity Events
+    private void Awake() {
+        Initialize();
+        SplashSaver.Start();
+    }
+
+    private void Start() {
+        Initialize();
     }
     #endregion
 }

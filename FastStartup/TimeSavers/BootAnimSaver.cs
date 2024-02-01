@@ -9,14 +9,14 @@ namespace FastStartup.TimeSavers;
 ///     The boot animation is the terminal-like startup
 ///     just before the menu is rendered.
 /// </summary>
-internal class BootAnimSaver {
+internal static class BootAnimSaver {
     private static readonly ManualLogSource LogSource = new($"{Plugin.ModName}.Savers.BootAnim");
 
-    internal BootAnimSaver() {
+    static BootAnimSaver() {
         Logger.Sources.Add(LogSource);
     }
 
-    internal void Start() {
+    internal static void Start() {
         if (!Plugin.Config.SkipBootAnim.Value) return;
         var game = Object.FindObjectOfType<InitializeGame>();
         if (game == null) return;

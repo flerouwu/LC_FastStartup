@@ -8,14 +8,14 @@ namespace FastStartup.TimeSavers;
 ///     Disables the warning popup when you
 ///     launch into LAN mode.
 /// </summary>
-internal class LanPopupSaver {
+internal static class LanPopupSaver {
     private static readonly ManualLogSource LogSource = new($"{Plugin.ModName}.Savers.LanPopup");
 
-    internal LanPopupSaver() {
+    static LanPopupSaver() {
         Logger.Sources.Add(LogSource);
     }
 
-    internal void Start() {
+    internal static void Start() {
         if (!Plugin.Config.DisableLanPopup.Value) return;
         var obj = Object.FindObjectOfType<MenuManager>();
         if (obj == null) return;

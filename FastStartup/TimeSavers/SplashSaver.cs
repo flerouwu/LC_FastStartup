@@ -13,14 +13,14 @@ namespace FastStartup.TimeSavers;
 ///     the game is initially opened. This includes the
 ///     "Made with Unity" and Zeekerss' logo.
 /// </summary>
-internal class SplashSaver {
+internal static class SplashSaver {
     private static readonly ManualLogSource LogSource = new($"{Plugin.ModName}.Savers.Splash");
 
-    internal SplashSaver() {
+    static SplashSaver() {
         Logger.Sources.Add(LogSource);
     }
 
-    internal void Start() {
+    internal static void Start() {
         if (!Plugin.Config.SkipSplashes.Value) return;
         Task.Factory.StartNew(() => {
             var delay = Plugin.Config.SplashDelay.Value;

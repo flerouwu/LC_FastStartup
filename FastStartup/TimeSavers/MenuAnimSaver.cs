@@ -6,14 +6,14 @@ namespace FastStartup.TimeSavers;
 ///     Skips the short menu scale animation
 ///     that plays when it is first opened.
 /// </summary>
-internal class MenuAnimSaver {
+internal static class MenuAnimSaver {
     private static readonly ManualLogSource LogSource = new($"{Plugin.ModName}.Savers.MenuAnim");
 
-    internal MenuAnimSaver() {
+    static MenuAnimSaver() {
         Logger.Sources.Add(LogSource);
     }
 
-    internal void Start() {
+    internal static void Start() {
         if (!Plugin.Config.SkipMenuAnim.Value) return;
         LogSource.LogInfo("Disabling menu open animation");
         GameNetworkManager.Instance.firstTimeInMenu = false;
