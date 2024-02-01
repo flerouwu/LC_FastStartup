@@ -1,5 +1,7 @@
 ﻿using BepInEx;
+using FastStartup.Patches;
 using FastStartup.TimeSavers;
+using HarmonyLib;
 using UnityEngine.SceneManagement;
 
 namespace FastStartup;
@@ -15,11 +17,6 @@ public class Plugin : BaseUnityPlugin {
 
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         switch (scene.name) {
-            // Launch Mode scene
-            case "InitSceneLaunchOptions":
-                new LaunchOptionsSaver().Start();
-                break;
-
             // Boot Animation scene
             case "InitScene":
             case "InitSceneLANMode":
@@ -43,6 +40,10 @@ public class Plugin : BaseUnityPlugin {
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         Logger.LogInfo($"Plugin {ModId} is loaded!");
+
+        Logger.LogInfo("Loading patches...");
+        var harmony = new Harmony(ModId);
+        harmony.PatchAll(typeof(PreInitSceneScriptPatch));
     }
 
 

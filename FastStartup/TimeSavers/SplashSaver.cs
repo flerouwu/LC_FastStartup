@@ -37,7 +37,7 @@ internal static class SplashSaver {
             // or if I could just do this once when the mod was loaded, but I
             // found no luck.
             // - flerouwu
-            while (!Plugin.Initialized) {
+            while (!LaunchOptionsSaver.HasRan) {
                 SplashScreen.Stop(SplashScreen.StopBehavior.StopImmediate);
                 if (Time.realtimeSinceStartup < duration) continue;
                 
