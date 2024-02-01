@@ -30,8 +30,15 @@ The config file has comments that should explain what everything does. If you ar
 <summary>Default Config</summary>
 
 ```properties
-## Settings file was created by plugin FastStartup v1.1.0
+## Settings file was created by plugin FastStartup v1.1.2
 ## Plugin GUID: dev.flero.lethal.FastStartup
+
+[FastStartup]
+
+## Version of this configuration file. DO NOT CHANGE THIS
+# Setting type: Int32
+# Default value: 2
+ConfigVersion = 2
 
 [LaunchMode]
 
@@ -44,9 +51,7 @@ Enabled = true
 # Setting type: LaunchMode
 # Default value: Online
 # Acceptable values: Online, Lan
-DefaultLaunchMode = Online
-
-[Misc]
+DefaultMode = Online
 
 ## Whether to disable the 'You are in LAN mode' popup.
 # Setting type: Boolean
@@ -65,10 +70,22 @@ BootAnim = true
 # Default value: true
 MenuAnim = true
 
+[Splashes]
+
 ## Whether we should skip the splash screens.
 # Setting type: Boolean
 # Default value: true
-SplashScreens = true
+Enabled = true
+
+## Delay in seconds before starting the splash skip.
+# Setting type: Int32
+# Default value: 0
+Delay = 0
+
+## Duration in seconds of how long the loop runs for before cancelling.
+# Setting type: Int32
+# Default value: 15
+Duration = 15
 ```
 </details>
 
