@@ -1,6 +1,6 @@
 {
   "name": "LC_FastStartup",
-  "version_number": "1.1.1",
+  "version_number": "1.1.2",
   "website_url": "https://github.com/flerouwu/LC_FastStartup",
   "description": "Lethal Company mod to skip the animations / splashes that play on game startup.",
   "dependencies": []

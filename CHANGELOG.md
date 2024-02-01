@@ -1,3 +1,9 @@
+### [1.1.2](https://github.com/flerouwu/LC_FastStartup/releases/tag/1.1.2)
+
+**Commit:** [`75c144bb`](https://github.com/flerouwu/LC_FastStartup/commit/75c144bb89ca71f32841963962c6122a6d007878)
+
+- **Launch Options Skip:** Fixed an issue that caused a NullReferenceException to be thrown on startup.
+
 ### [1.1.1](https://github.com/flerouwu/LC_FastStartup/releases/tag/1.1.1)
 
 **Commit:** [`a0037ba0`](https://github.com/flerouwu/LC_FastStartup/commit/a0037ba0d55d1597392eb2de484dbd12f481b610)

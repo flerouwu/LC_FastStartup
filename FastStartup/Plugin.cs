@@ -10,7 +10,7 @@ namespace FastStartup;
 public class Plugin : BaseUnityPlugin {
     public const string ModId = "dev.flero.lethal.FastStartup";
     public const string ModName = "FastStartup";
-    public const string ModVersion = "1.1.1";
+    public const string ModVersion = "1.1.2";
 
     public new static Config.Config Config { get; private set; }
     public static bool Initialized { get; private set; }
