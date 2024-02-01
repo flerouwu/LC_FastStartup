@@ -5,8 +5,6 @@ namespace FastStartup.Config;
 
 public class Config {
     private const int CurrentVersion = 2;
-    private readonly ManualLogSource LogSource = new("FastStartup > Config");
-    internal readonly ConfigFile File;
 
     public readonly ConfigEntry<int> ConfigVersion;
 
@@ -20,6 +18,9 @@ public class Config {
     public readonly ConfigEntry<bool> SkipSplashes;
     public readonly ConfigEntry<int> SplashDelay;
     public readonly ConfigEntry<int> SplashDuration;
+    
+    internal readonly ConfigFile File;
+    private readonly ManualLogSource LogSource = new("FastStartup > Config");
 
     public Config(ConfigFile file) {
         File = file;

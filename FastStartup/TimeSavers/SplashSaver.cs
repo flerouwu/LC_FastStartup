@@ -39,8 +39,8 @@ internal static class SplashSaver {
             // - flerouwu
             while (!Plugin.Initialized) {
                 SplashScreen.Stop(SplashScreen.StopBehavior.StopImmediate);
-
-                if (!(Time.realtimeSinceStartup > duration)) continue;
+                if (Time.realtimeSinceStartup < duration) continue;
+                
                 LogSource.LogError($"Failed to remove splash screen: {duration} seconds has passed since startup!");
                 break;
             }

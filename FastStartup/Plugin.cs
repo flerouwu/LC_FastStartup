@@ -13,28 +13,6 @@ public class Plugin : BaseUnityPlugin {
     public new static Config.Config Config { get; private set; }
     public static bool Initialized { get; private set; }
 
-    internal static void Initialize() {
-        if (Initialized) return;
-        Initialized = true;
-    }
-
-
-    #region Unity Events
-    private void Awake() {
-        Logger.LogInfo("Loading Configuration");
-        Config = new Config.Config(base.Config);
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        Logger.LogInfo($"Plugin {ModId} is loaded!");
-
-        // Skip splash
-        new SplashSaver().Start();
-    }
-
-    private void Start() {
-        Initialize();
-    }
-
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         switch (scene.name) {
             // Launch Mode scene
