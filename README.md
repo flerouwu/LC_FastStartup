@@ -7,7 +7,7 @@ Lethal Company mod to skip the animations / splashes that play
 on game startup.
 
 > [!NOTE]
-> FastStartup does not increase the load times of your game, it only skips the initial startup animations / splash screens.
+> FastStartup does not decrease the load times of your game, it only skips the initial startup animations / splash screens.
 
 ### Animations Skipped
 
